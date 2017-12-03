@@ -171,7 +171,7 @@ results_df.head()
 #Tumor Response to Treatment
 
 drugGroup = results_df.groupby(['Drug', 'Timepoint']).mean()
-drugGroup
+drugGroup.head(30)
 
 ```
 
@@ -361,168 +361,8 @@ drugGroup
       <td>65.755562</td>
       <td>2.111111</td>
     </tr>
-    <tr>
-      <th>...</th>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th rowspan="10" valign="top">Ramicane</th>
-      <th>0</th>
-      <td>45.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>43.944859</td>
-      <td>0.120000</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>42.531957</td>
-      <td>0.250000</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>41.495061</td>
-      <td>0.333333</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>40.238325</td>
-      <td>0.347826</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>38.974300</td>
-      <td>0.652174</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>38.703137</td>
-      <td>0.782609</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>37.451996</td>
-      <td>0.952381</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>36.574081</td>
-      <td>1.100000</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>34.955595</td>
-      <td>1.250000</td>
-    </tr>
-    <tr>
-      <th rowspan="10" valign="top">Stelasyn</th>
-      <th>0</th>
-      <td>45.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>47.527452</td>
-      <td>0.240000</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>49.463844</td>
-      <td>0.478261</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>51.529409</td>
-      <td>0.782609</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>54.067395</td>
-      <td>0.952381</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>56.166123</td>
-      <td>1.157895</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>59.826738</td>
-      <td>1.388889</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>62.440699</td>
-      <td>1.562500</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>65.356386</td>
-      <td>1.583333</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>68.438310</td>
-      <td>1.727273</td>
-    </tr>
-    <tr>
-      <th rowspan="10" valign="top">Zoniferol</th>
-      <th>0</th>
-      <td>45.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>46.851818</td>
-      <td>0.166667</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>48.689881</td>
-      <td>0.500000</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>50.779059</td>
-      <td>0.809524</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>53.170334</td>
-      <td>1.294118</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>55.432935</td>
-      <td>1.687500</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>57.713531</td>
-      <td>1.933333</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>60.089372</td>
-      <td>2.285714</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>62.916692</td>
-      <td>2.785714</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>65.960888</td>
-      <td>3.071429</td>
-    </tr>
   </tbody>
 </table>
-<p>100 rows × 2 columns</p>
 </div>
 
 
@@ -726,7 +566,7 @@ drugTable
 #***Scatter plot using line plot with markers just like in example
 ### makePlot == graphs a pivot table with (index==Timepoint) & (column==a specific drug) 
 def makePlot(table):
-    #Get a different marker/dot for each drug
+    #Get 10 different markers/dots for each drug
     mark_list = ["x", "s", "o", "v", "^", "<", ">", "D", "*", "P"]
     markNum = 0
     #get standard error of the mean
@@ -742,9 +582,11 @@ def makePlot(table):
     #change figure size
 fig, ax = plt.subplots()
     # the size of A4 paper
-fig.set_size_inches(11.7, 8.27) 
+fig.set_size_inches(11.7, 8.27)
 #make plot from pivot table
 makePlot(drugTable)
+
+# Title and style
 sns.set_style('dark')  
 ax.grid(linestyle='--', linewidth=1)
 ax.set_xlim(0, 45)
@@ -960,6 +802,8 @@ fig, ax = plt.subplots()
 fig.set_size_inches(11.7, 8.27) 
 #make plot from pivot table
 makePlot(drugTableM)
+
+# Title and style
 ax.grid(linestyle='--', linewidth=1)
 ax.set_xlim(0, 45)
 plt.title('Metastatic Spread During Treatment')
@@ -976,12 +820,12 @@ plt.show()
 
 ```python
 #Survival rate over time of mice for each drug
-#The count of mice for each time period
+    #The count of mice for each time period, as mice is counted only if survive at x time period
 mouseNum = results_df.groupby(['Drug', 'Timepoint']).count()
-#The count of mice at the beginning 
+    #The count of mice at the beginning 
 mouseNStart = results_df[results_df['Timepoint']==0].groupby(['Drug']).count()
 mouseNStart_s = pd.Series(mouseNStart['Mouse ID'])
-#Get % of surviving mice by dividing mice count from starting mice count
+    #Get % of surviving mice by dividing mice count from starting mice count
 mouseSurv = mouseNum['Mouse ID'].div(mouseNStart_s, level='Drug') * 100
 mouseSurv = pd.DataFrame(data=mouseSurv)
 mouseSurvTable = pd.pivot_table(mouseSurv, values = 'Mouse ID', index = 'Timepoint', columns = 'Drug')
@@ -993,9 +837,11 @@ fig, ax = plt.subplots()
 fig.set_size_inches(11.7, 8.27)
 #make plot from pivot table
 makePlot(mouseSurvTable)
+
+# Title and style
 ax.grid(linestyle='--', linewidth=1)
 ax.set_xlim(0, 45)
-ax.set_ylim(0, 100)
+ax.set_ylim(0, 100) # y axis can only be between 0 and 100 for survival rates
 plt.title('Survival During Treatment')
 plt.xlabel('Time (Days)')
 plt.ylabel('Survival Rate (%)')
@@ -1015,7 +861,7 @@ plt.show()
 #Gets row & column where timepoint == 0 and timepoint == 45 
 TumorStart = drugTable.xs(0)
 TumorEnd = drugTable.xs(45)
-#percent change = (new - old)/old times 100
+    #percent change = (new - old)/old times 100. Does not return % sign. 
 def percChng(end, start):
     Change = ((end - start)/start) * 100
     return round(Change, 2)
@@ -1040,7 +886,7 @@ fig.set_size_inches(11.7, 8.27)
 sns.barplot(x= TumorChng_df.index ,y='Tumor Change (%)', data=TumorChng_df, palette=color_ls, orient='v')
 
 #add annotations for each graph
-for p in ax.patches:
+for p in ax.patches: # loops through each bar or "patch" I guess
     if p.get_height() > 0:
         ax.annotate(str(p.get_height()) + '%', (p.get_x() + .17, 2), color='black')
     else:
